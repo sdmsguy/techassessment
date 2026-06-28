@@ -14,7 +14,7 @@ export default function EuromonitorLogo({ size = 'md', white = false }: Props) {
   return (
     <div className="flex items-center gap-3">
       <div className={`${s.icon} flex items-center justify-center`}>
-        <img src="/euromonitor-logo.png" alt="Euromonitor Logo" className="w-full h-full object-contain" />
+        <img src="/images/euromonitor-logo.png" alt="Euromonitor Logo" className="w-full h-full object-contain" />
       </div>
       <div className="leading-tight">
         <h1 className={`${s.text} font-extrabold tracking-tight ${white ? 'text-white' : 'text-euro-dark'}`}>
