@@ -13,12 +13,8 @@ export default function EuromonitorLogo({ size = 'md', white = false }: Props) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className={`${s.icon} rounded-xl bg-gradient-to-br from-euro-orange to-euro-orange-dark flex items-center justify-center shadow-lg shadow-euro-orange/20`}>
-        <svg viewBox="0 0 24 24" className={`${s.iconInner} text-white`} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-          <path d="M2 17l10 5 10-5" />
-          <path d="M2 12l10 5 10-5" />
-        </svg>
+      <div className={`${s.icon} flex items-center justify-center`}>
+        <img src="/images/euromonitor-logo.png" alt="Euromonitor Logo" className="w-full h-full object-contain" />
       </div>
       <div className="leading-tight">
         <h1 className={`${s.text} font-extrabold tracking-tight ${white ? 'text-white' : 'text-euro-dark'}`}>
