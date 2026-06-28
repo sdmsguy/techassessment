@@ -1,0 +1,124 @@
+import { useState } from 'react';
+import EuromonitorLogo from './EuromonitorLogo';
+import { CANDIDATE_PASSWORD } from '../config';
+import { Lock, ArrowRight, ArrowLeft, AlertCircle, Eye, EyeOff } from 'lucide-react';
+
+interface Props {
+  onSuccess: () => void;
+  onBack: () => void;
+}
+
+export default function LoginScreen({ onSuccess, onBack }: Props) {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPw, setShowPw] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    setTimeout(() => {
+      if (password === CANDIDATE_PASSWORD) {
+        onSuccess();
+      } else {
+        setError('Invalid access code. Please contact your recruiter.');
+      }
+      setLoading(false);
+    }, 600);
+  };
+
+  return (
+    <div className="min-h-screen bg-euro-light flex items-center justify-center p-6">
+      {/* background blobs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-euro-orange/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-euro-orange/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative w-full max-w-md animate-fade-in">
+        {/* Card */}
+        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/60 border border-gray-100 overflow-hidden">
+          {/* Header strip */}
+          <div className="bg-gradient-to-r from-euro-orange to-euro-orange-dark p-6 text-center">
+            <div className="flex justify-center mb-3">
+              <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
+                <Lock className="w-7 h-7 text-white" />
+              </div>
+            </div>
+            <h2 className="text-xl font-bold text-white">Assessment Portal</h2>
+            <p className="text-sm text-white/70 mt-1">Enter the access code provided by your recruiter</p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="p-8">
+            <div className="mb-6">
+              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+                Access Code
+              </label>
+              <div className="relative">
+                <input
+                  type={showPw ? 'text' : 'password'}
+                  value={password}
+                  onChange={e => { setPassword(e.target.value); setError(''); }}
+                  placeholder="Enter your access code"
+                  className="w-full px-4 py-3.5 pr-12 rounded-xl border-2 border-gray-200 text-euro-dark font-medium
+                    focus:outline-none focus:border-euro-orange focus:ring-4 focus:ring-euro-orange/10 transition-all
+                    placeholder:text-gray-300"
+                  autoFocus
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPw(!showPw)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+                >
+                  {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm mb-4 animate-fade-in">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={!password || loading}
+              className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-euro-orange to-euro-orange-dark
+                text-white rounded-xl font-bold text-sm shadow-lg shadow-euro-orange/20
+                hover:shadow-xl hover:shadow-euro-orange/30 transition-all
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+            >
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  Verify & Continue
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+
+        {/* Back link */}
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 mx-auto mt-6 text-sm text-gray-400 hover:text-euro-orange transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to home
+        </button>
+
+        {/* Branding */}
+        <div className="flex justify-center mt-8">
+          <EuromonitorLogo size="sm" />
+        </div>
+      </div>
+    </div>
+  );
+}

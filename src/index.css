@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-euro-orange: #F37021;
+  --color-euro-orange-light: #FF8C42;
+  --color-euro-orange-dark: #D45A0A;
+  --color-euro-orange-50: #FFF7F0;
+  --color-euro-orange-100: #FFE8D4;
+  --color-euro-orange-200: #FFD0A8;
+  --color-euro-orange-300: #FFB070;
+  --color-euro-orange-400: #FF8C42;
+  --color-euro-orange-500: #F37021;
+  --color-euro-orange-600: #D45A0A;
+  --color-euro-orange-700: #B04508;
+  --color-euro-orange-800: #8C360D;
+  --color-euro-orange-900: #6B2C0E;
+  --color-euro-dark: #1A1A2E;
+  --color-euro-gray: #6B7280;
+  --color-euro-light: #F8F9FC;
+  --color-paper: #FFFFFF;
+  --color-success: #059669;
+  --color-error: #DC2626;
+  --color-warning: #D97706;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f3f4f6;
+}
+*::-webkit-scrollbar { width: 5px; height: 5px; }
+*::-webkit-scrollbar-track { background: #f3f4f6; }
+*::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 20px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-border {
+  0%, 100% { border-color: rgba(243,112,33,0.3); }
+  50%      { border-color: rgba(243,112,33,0.8); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+@keyframes countDown {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 283; }
+}
+
+.animate-fade-in      { animation: fadeIn 0.35s ease-out forwards; }
+.animate-fade-in-scale { animation: fadeInScale 0.3s ease-out forwards; }
+.animate-slide-up     { animation: slideUp 0.4s ease-out forwards; }
+.animate-pulse-border { animation: pulse-border 2s infinite; }
+.animate-blink        { animation: blink 1s step-end infinite; }
+
+.code-editor {
+  font-family: var(--font-mono);
+  tab-size: 4;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+.code-editor:focus { outline: none; }
+
+/* Print styles for the exam paper feel */
+@media print {
+  .no-print { display: none !important; }
+}
